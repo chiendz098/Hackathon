@@ -4,14 +4,10 @@
   "description": "FPT COMPASS Hub - AI Learning Platform",
   "private": true,
   "scripts": {
-    "build": "cd hackathon/frontend && npm install && npm run build",
-    "dev": "cd hackathon/frontend && npm run dev",
-    "start": "cd hackathon/frontend && npm run preview"
+    "build": "npm run build",
+    "dev": "npm run dev",
+    "start": "npm run preview"
   },
-  "workspaces": [
-    "hackathon/frontend",
-    "hackathon/backend"
-  ],
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
