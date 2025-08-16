@@ -1,0 +1,350 @@
+.pet-evolution-system {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Evolution Progress Container */
+.evolution-progress-container {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.evolution-stage-info h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.evolution-stage-info p {
+  margin: 0 0 15px 0;
+  color: #666;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Evolution Progress Bar */
+.evolution-progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.progress-track {
+  flex: 1;
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #8BC34A, #CDDC39);
+  border-radius: 6px;
+  transition: width 0.8s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.progress-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  min-width: 50px;
+}
+
+.next-stage-info p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Evolution Button */
+.evolve-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  margin-bottom: 25px;
+}
+
+.evolve-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+}
+
+.evolve-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Evolution Stages */
+.evolution-stages h5 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.stages-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stage-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.stage-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stage-item.completed {
+  border-color: #4CAF50;
+  background: linear-gradient(135deg, #E8F5E8, #F1F8E9);
+}
+
+.stage-item.current {
+  border-color: #2196F3;
+  background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+  transform: scale(1.02);
+}
+
+.stage-icon {
+  font-size: 24px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.stage-info {
+  flex: 1;
+}
+
+.stage-name {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.stage-level {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Evolution Modal */
+.evolution-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.evolution-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-header h3 {
+  margin: 0 0 25px 0;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Evolution Animation */
+.evolution-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px 0;
+}
+
+.old-pet, .new-pet {
+  text-align: center;
+}
+
+.old-pet img, .new-pet img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #e0e0e0;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.new-pet img {
+  border-color: #4CAF50;
+  animation: newPetGlow 2s ease-in-out infinite;
+}
+
+@keyframes newPetGlow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
+    transform: scale(1.05);
+  }
+}
+
+.old-pet p, .new-pet p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+}
+
+.evolution-arrow {
+  font-size: 32px;
+  color: #4CAF50;
+  animation: arrowPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.modal-footer {
+  margin-top: 30px;
+}
+
+.close-modal-btn {
+  background: linear-gradient(45deg, #666, #999);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pet-evolution-system {
+    padding: 15px;
+  }
+  
+  .evolution-animation {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .evolution-modal {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .stage-item {
+    padding: 12px;
+  }
+  
+  .stage-icon {
+    font-size: 20px;
+    min-width: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .evolution-modal {
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .modal-header h3 {
+    font-size: 20px;
+  }
+  
+  .old-pet img, .new-pet img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .evolution-arrow {
+    font-size: 24px;
+  }
+} 

@@ -1,0 +1,39 @@
+{
+  "name": "fpt-university-platform",
+  "version": "1.0.0",
+  "description": "FPT COMPASS Learning Platform with AI Integration",
+  "main": "index.js",
+  "scripts": {
+    "start": "node start-integrated-system.js",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run dev",
+    "start:chatbot": "cd chatbot_final && python app.py",
+    "start:integrated": "node start-integrated-system.js",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../chatbot_final && pip install -r requirements.txt",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "dev:integrated": "concurrently \"npm run start:integrated\" \"npm run start:frontend\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "education",
+    "learning",
+    "ai",
+    "chatbot",
+    "fpt",
+    "university"
+  ],
+  "author": "FPT COMPASS",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "framer-motion": "^12.23.12",
+    "puppeteer": "^24.16.2",
+    "react-particles": "^2.12.2",
+    "socket.io-client": "^4.8.1",
+    "tsparticles": "^3.9.1",
+    "vite-plugin-pwa": "^0.21.2"
+  }
+}

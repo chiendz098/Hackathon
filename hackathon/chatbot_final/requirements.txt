@@ -1,0 +1,32 @@
+# Core LangChain packages
+langchain==0.3.26
+langchain-community==0.3.27
+langchain-google-genai
+langgraph==0.6.4
+langchain-pinecone==0.2.8
+langchain-tavily==0.2.7
+langchain-huggingface==0.3.0
+sentence-transformers==5.0.0
+
+# Data validation
+pydantic==2.11.7
+pydantic[email]
+
+# Database
+langgraph-checkpoint-postgres==2.0.21
+sqlalchemy==2.0.41
+psycopg==3.2.9
+psycopg-binary==3.2.9
+psycopg-pool==3.2.6
+psycopg2==2.9.10
+
+#Authentication
+PyJWT==2.10.1
+
+# Utility packages
+python-dotenv==1.1.1
+
+# Apis
+fastapi==0.116.0
+uvicorn
+python-multipart==0.0.20

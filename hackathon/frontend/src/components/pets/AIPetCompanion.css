@@ -1,0 +1,670 @@
+.ai-pet-companion {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Pet Container */
+.pet-container {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(0.8);
+  opacity: 0.7;
+}
+
+.pet-container:hover {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.pet-container.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Pet Avatar */
+.pet-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pet-avatar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.pet-avatar:hover::before {
+  transform: translateX(100%);
+}
+
+/* Pet Mood States */
+.pet-avatar.happy {
+  border-color: #4CAF50;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.pet-avatar.sad {
+  border-color: #FF9800;
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+  filter: brightness(0.8);
+}
+
+.pet-avatar.hungry {
+  border-color: #F44336;
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+/* Animations */
+.pet-avatar.jump {
+  animation: jump 0.6s ease-in-out;
+}
+
+.pet-avatar.dance {
+  animation: dance 1s ease-in-out infinite;
+}
+
+.pet-avatar.wave {
+  animation: wave 0.8s ease-in-out;
+}
+
+.pet-avatar.eat {
+  animation: eat 1s ease-in-out;
+}
+
+.pet-avatar.play {
+  animation: play 0.8s ease-in-out;
+}
+
+.pet-avatar.cry {
+  animation: cry 1s ease-in-out;
+}
+
+.pet-avatar.tilt {
+  animation: tilt 0.6s ease-in-out;
+}
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes dance {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes eat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes play {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.05); }
+}
+
+@keyframes cry {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-5px); }
+  75% { transform: translateY(5px); }
+}
+
+@keyframes tilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+}
+
+/* Status Bars */
+.pet-status {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+}
+
+.status-bar .bar {
+  width: 30px;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.status-bar .fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.happiness .fill {
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+}
+
+.hunger .fill {
+  background: linear-gradient(90deg, #FF9800, #FFC107);
+}
+
+/* Voice Button */
+.voice-btn {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: #2196F3;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.voice-btn:hover {
+  background: #1976D2;
+  transform: scale(1.1);
+}
+
+.voice-btn.listening {
+  background: #F44336;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Pet Panel */
+.pet-panel {
+  position: absolute;
+  bottom: 100px;
+  right: 0;
+  width: 320px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  animation: slideIn 0.3s ease-out;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.panel-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+/* Pet Response */
+.pet-response {
+  margin-bottom: 15px;
+}
+
+.response-bubble {
+  background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+  padding: 12px 16px;
+  border-radius: 18px;
+  border-bottom-left-radius: 5px;
+  position: relative;
+  animation: bubbleIn 0.3s ease-out;
+}
+
+@keyframes bubbleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.response-bubble p {
+  margin: 0 0 8px 0;
+  color: #1976D2;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.todo-reminder {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.action-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.action-btn.feed {
+  background: linear-gradient(135deg, #FF9800, #FFC107);
+  color: white;
+}
+
+.action-btn.play {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+  color: white;
+}
+
+.action-btn.praise {
+  background: linear-gradient(135deg, #2196F3, #03A9F4);
+  color: white;
+}
+
+.action-btn.study {
+  background: linear-gradient(135deg, #9C27B0, #E91E63);
+  color: white;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Voice Input */
+.voice-input-section {
+  margin-bottom: 15px;
+}
+
+.voice-input-btn {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #E0E0E0;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.voice-input-btn:hover {
+  border-color: #2196F3;
+  background: #F5F5F5;
+}
+
+.voice-input-btn.listening {
+  border-color: #F44336;
+  background: #FFEBEE;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.voice-input {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.voice-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.voice-input input:focus {
+  outline: none;
+  border-color: #2196F3;
+}
+
+.send-btn {
+  padding: 10px 15px;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.send-btn:hover {
+  background: #1976D2;
+}
+
+/* Todo Reminders */
+.todo-reminders {
+  background: #F5F5F5;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.todo-reminders h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.todo-reminders ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.todo-reminders li {
+  padding: 8px 0;
+  border-bottom: 1px solid #E0E0E0;
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-reminders li:last-child {
+  border-bottom: none;
+}
+
+.todo-reminders li.priority-high {
+  color: #F44336;
+  font-weight: 500;
+}
+
+.todo-reminders li.priority-medium {
+  color: #FF9800;
+}
+
+.todo-reminders li.priority-low {
+  color: #4CAF50;
+}
+
+.due-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.more-todos {
+  margin: 10px 0 0 0;
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+}
+
+/* Pet Stats */
+.pet-stats {
+  background: #F8F9FA;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.stat:last-child {
+  margin-bottom: 0;
+}
+
+.stat span:first-child {
+  font-size: 14px;
+  color: #666;
+  min-width: 80px;
+}
+
+.stat-bar {
+  flex: 1;
+  height: 8px;
+  background: #E0E0E0;
+  border-radius: 4px;
+  margin: 0 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.stat-fill.happiness {
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+}
+
+.stat-fill.hunger {
+  background: linear-gradient(90deg, #FF9800, #FFC107);
+}
+
+.stat span:last-child {
+  font-size: 12px;
+  color: #999;
+  min-width: 30px;
+  text-align: right;
+}
+
+/* Voice Instructions */
+.voice-instructions {
+  position: absolute;
+  bottom: -30px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pet-container:hover .voice-instructions {
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ai-pet-companion {
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .pet-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .pet-panel {
+    width: 280px;
+    right: -20px;
+  }
+  
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .pet-panel {
+    width: 260px;
+    right: -40px;
+  }
+  
+  .voice-instructions {
+    display: none;
+  }
+} 
+
+/* No Pet State */
+.ai-pet-companion.no-pet {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.no-pet-message {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  min-width: 250px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideInUp 0.5s ease-out;
+}
+
+.no-pet-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  animation: bounce 2s infinite;
+}
+
+.no-pet-message h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.no-pet-message p {
+  margin: 0 0 20px 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.adopt-pet-btn {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.adopt-pet-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+
+.adopt-pet-btn:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+} 

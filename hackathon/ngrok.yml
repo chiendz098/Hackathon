@@ -1,0 +1,11 @@
+version: "2"
+authtoken: 2HUJaJMvGiMQQMrEPodgXov7Jfc_73aViN2MAefv9GHjKh3sL
+tunnels:
+  backend:
+    addr: 5001
+    proto: http
+    subdomain: ai-learning-backend
+  chatbot:
+    addr: 8000
+    proto: http
+    subdomain: ai-learning-chatbot 
